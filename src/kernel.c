@@ -1,17 +1,13 @@
-#if !defined(__cplusplus)
-#include <stdbool.h> /* C doesn't have booleans by default. */
-#endif
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
- 
-/* Check if the compiler thinks we are targeting the wrong operating system. */
+
 #if defined(__linux__)
-#error "You are not using a cross-compiler, you will most certainly run into trouble"
+#error "Use a cross-compiler!"
 #endif
  
-/* This tutorial will only work for the 32-bit ix86 targets. */
 #if !defined(__i386__)
-#error "This tutorial needs to be compiled with a ix86-elf compiler"
+#error "Compiler isn't ix86-elf"
 #endif
  
 /* Hardware text mode color constants. */
@@ -96,10 +92,7 @@ void terminal_writestring(const char* data) {
 	for (size_t i = 0; i < datalen; i++)
 		terminal_putchar(data[i]);
 }
- 
-#if defined(__cplusplus)
-extern "C" /* Use C linkage for kernel_main. */
-#endif
+
 void kernel_main() {
 	/* Initialize terminal interface */
 	terminal_initialize();
@@ -108,5 +101,9 @@ void kernel_main() {
          * yet, '\n' will produce some VGA specific character instead.
          * This is normal.
          */
-	terminal_writestring("Hello, kernel World!\n");
+	terminal_setcolor(make_color(COLOR_LIGHT_GREY, COLOR_RED));
+	terminal_writestring("                             BRSYSTLS v0.01 - DEBUG                             ");
+	terminal_setcolor(make_color(COLOR_GREEN, COLOR_BLACK));
+	terminal_writestring("Hello, kernel World!");
+	terminal_writestring("Hello, kernel World!");
 }
