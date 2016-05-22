@@ -1,9 +1,9 @@
 NAME = kernel
 ASSEMBLER = i686-elf-as
 # ASSEMBLER = nasm
-I686_CCC = i686-elf-gcc
-I686_CXXC = i686-elf-g++
-I686_LINKER = i686-elf-gcc
+I686_CCC = ./.ccompiler/bin/i686-elf-gcc
+I686_CXXC = ./.ccompiler/bin/i686-elf-g++
+I686_LINKER = ./.ccompiler/bin/i686-elf-gcc
 I386_EMU = qemu-system-i386
 DIRMAKER = mkdir
 
