@@ -31,15 +31,15 @@ debug: compile run_debug
 compile: mk_dir c_main c_video c_terminal asm_boot mk_bin
 
 mk_dir:
-	$(MKDIR) bin/obj/
+	$(MKDIR) bin/obj/kernel
 	$(MKDIR) bin/obj/video
 	$(MKDIR) bin/obj/terminal
 
 asm_boot:
-	$(ASSEMBLER) src/boot.S -o bin/obj/boot.o
+	$(ASSEMBLER) src/kernel/boot.S -o bin/obj/kernel/boot.o
 
 c_main:
-	$(I686_CCC) -c src/kernel.c -o bin/obj/kernel.o $(C99) $(CFLAGS)
+	$(I686_CCC) -c src/kernel/main.c -o bin/obj/kernel/main.o $(C99) $(CFLAGS)
 
 c_video:
 	$(I686_CCC) -c src/video/colors.c -o bin/obj/video/colors.o $(C99) $(CFLAGS)
@@ -49,9 +49,9 @@ c_terminal:
 	$(I686_CCC) -c src/terminal/cursor.c -o bin/obj/terminal/cursor.o $(C99) $(CFLAGS)
 
 mk_bin:
-	$(I686_LINKER) -T src/linker.ld -o bin/brsystls.bin $(LNFLAGS) \
-	bin/obj/boot.o \
-	bin/obj/kernel.o \
+	$(I686_LINKER) -T src/kernel/linker.ld -o bin/brsystls.bin $(LNFLAGS) \
+	bin/obj/kernel/boot.o \
+	bin/obj/kernel/main.o \
 	bin/obj/video/colors.o \
 	bin/obj/video/detect.o \
 	bin/obj/terminal/cursor.o \
