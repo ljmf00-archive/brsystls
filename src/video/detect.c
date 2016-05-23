@@ -1,5 +1,9 @@
+// ┌┐ ┬─┐┌─┐┬ ┬┌─┐┌┬┐┬  ┌─┐ | Bootable Rescue System Tools
+// ├┴┐├┬┘└─┐└┬┘└─┐ │ │  └─┐ | @author Luís Ferreira
+// └─┘┴└─└─┘ ┴ └─┘ ┴ ┴─┘└─┘ | @license GNU Public License v3
+
 #include <stdint.h>
- 
+
 enum video_type
 {
     VIDEO_TYPE_NONE = 0x00,

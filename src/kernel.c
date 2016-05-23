@@ -1,14 +1,14 @@
+// ┌┐ ┬─┐┌─┐┬ ┬┌─┐┌┬┐┬  ┌─┐ | Bootable Rescue System Tools
+// ├┴┐├┬┘└─┐└┬┘└─┐ │ │  └─┐ | @author Luís Ferreira
+// └─┘┴└─└─┘ ┴ └─┘ ┴ ┴─┘└─┘ | @license GNU Public License v3
+
+#include <brsystls/cfg/directives.h>
+#include <brsystls/video.h>
+#include <brsystls/terminal.h>
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-
-#if defined(__linux__)
-#error "Use a cross-compiler!"
-#endif
- 
-#if !defined(__i386__)
-#error "Compiler isn't ix86-elf"
-#endif
  
 /* Hardware text mode color constants. */
 enum vga_color {
@@ -105,5 +105,7 @@ void kernel_main() {
 	terminal_writestring("                             BRSYSTLS v0.01 - DEBUG                             ");
 	terminal_setcolor(make_color(COLOR_GREEN, COLOR_BLACK));
 	terminal_writestring("Hello, kernel World!");
-	terminal_writestring("Hello, kernel World!");
+	terminal_column = 0;
+	terminal_row++;
+	terminal_writestring("Hello");
 }

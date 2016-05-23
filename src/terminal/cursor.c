@@ -1,5 +1,11 @@
- void update_cursor(int row, int col)
- {
+// ┌┐ ┬─┐┌─┐┬ ┬┌─┐┌┬┐┬  ┌─┐ | Bootable Rescue System Tools
+// ├┴┐├┬┘└─┐└┬┘└─┐ │ │  └─┐ | @author Luís Ferreira
+// └─┘┴└─└─┘ ┴ └─┘ ┴ ┴─┘└─┘ | @license GNU Public License v3
+
+#include <sys/io.h>
+
+void update_cursor(int row, int col)
+{
     unsigned short position=(row*80) + col;
  
     // cursor LOW port to vga INDEX register
@@ -8,4 +14,4 @@
     // cursor HIGH port to vga INDEX register
     outb(0x3D4, 0x0E);
     outb(0x3D5, (unsigned char )((position>>8)&0xFF));
- }
+}
