@@ -28,12 +28,13 @@ all: compile mk_iso run
 
 debug: compile run_debug
 
-compile: mk_dir c_main c_video c_terminal asm_boot mk_bin
+compile: mk_dir c_main c_video c_terminal c_lib asm_boot mk_bin
 
 mk_dir:
 	$(MKDIR) bin/obj/kernel
 	$(MKDIR) bin/obj/video
 	$(MKDIR) bin/obj/terminal
+	$(MKDIR) bin/obj/lib/
 
 asm_boot:
 	$(ASSEMBLER) src/kernel/boot.S -o bin/obj/kernel/boot.o
@@ -42,19 +43,25 @@ c_main:
 	$(I686_CCC) -c src/kernel/main.c -o bin/obj/kernel/main.o $(C99) $(CFLAGS)
 
 c_video:
-	$(I686_CCC) -c src/video/colors.c -o bin/obj/video/colors.o $(C99) $(CFLAGS)
-	$(I686_CCC) -c src/video/detect.c -o bin/obj/video/detect.o $(C99) $(CFLAGS)
+	$(I686_CCC) -c src/video/color.c -o bin/obj/video/color.o $(C99) $(CFLAGS)
 
 c_terminal:
 	$(I686_CCC) -c src/terminal/cursor.c -o bin/obj/terminal/cursor.o $(C99) $(CFLAGS)
+	$(I686_CCC) -c src/terminal/write.c -o bin/obj/terminal/write.o $(C99) $(CFLAGS)
+	$(I686_CCC) -c src/terminal/terminal.c -o bin/obj/terminal.o $(C99) $(CFLAGS)
+
+c_lib:
+	$(I686_CCC) -c src/lib/stringdef.c -o bin/obj/lib/stringdef.o $(C99) $(CFLAGS)
 
 mk_bin:
 	$(I686_LINKER) -T src/kernel/linker.ld -o bin/brsystls.bin $(LNFLAGS) \
 	bin/obj/kernel/boot.o \
 	bin/obj/kernel/main.o \
-	bin/obj/video/colors.o \
-	bin/obj/video/detect.o \
+	bin/obj/video/color.o \
 	bin/obj/terminal/cursor.o \
+	bin/obj/terminal.o \
+	bin/obj/terminal/write.o \
+	bin/obj/lib/stringdef.o \
 	$(LGCC)
 
 mk_iso:

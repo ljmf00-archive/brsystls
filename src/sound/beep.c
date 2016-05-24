@@ -1,6 +1,10 @@
+// ┌┐ ┬─┐┌─┐┬ ┬┌─┐┌┬┐┬  ┌─┐ | Bootable Rescue System Tools
+// ├┴┐├┬┘└─┐└┬┘└─┐ │ │  └─┐ | @author Luís Ferreira
+// └─┘┴└─└─┘ ┴ └─┘ ┴ ┴─┘└─┘ | @license GNU Public License v3
+
  //Play sound using built in speaker
- static void play_sound(uint32_t nFrequence) {
- 	uint32_t Div;
+static void sound_play(uint32_t nFrequence) {
+	uint32_t Div;
  	uint8_t tmp;
  
         //Set the PIT to the desired frequency
@@ -17,16 +21,14 @@
  }
  
  //make it shutup
- static void nosound() {
+ static void sound_stop() {
  	uint8_t tmp = inb(0x61) & 0xFC;
- 
  	outb(0x61, tmp);
  }
  
  //Make a beep
- void beep() {
+ void sound_beep() {
  	 play_sound(1000);
  	 timer_wait(10);
  	 nosound();
-          //set_PIT_2(old_frequency);
  }
