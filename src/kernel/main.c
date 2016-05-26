@@ -21,4 +21,6 @@ void kernel_main() {
 	terminal_writeln("                             BRSYSTLS v0.01 - DEBUG                             ");
 	terminal_set_color(make_color(COLOR_GREEN, COLOR_BLACK));
 	terminal_writeln("Hello, kernel World!");
+	terminal_write_nl();
+	terminal_update_cursor(terminal_row, terminal_column);
 }

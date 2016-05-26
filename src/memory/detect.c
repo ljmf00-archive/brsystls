@@ -4,7 +4,6 @@
 
 #include <brsystls/memory.h>
 #include <brsystls/serial.h>
-#include <asm/io.h>
 
 __asm__(".code16gcc\n");
 

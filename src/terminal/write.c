@@ -27,3 +27,8 @@ void terminal_writeln(const char* data) {
     if(terminal_column != 0) terminal_row++;
     terminal_column = 0;
 }
+
+void terminal_write_nl(void) {
+    if(terminal_column != 0) terminal_row++;
+    terminal_column = 0;
+}

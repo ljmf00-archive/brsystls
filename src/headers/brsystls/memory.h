@@ -3,6 +3,7 @@
 // └─┘┴└─└─┘ ┴ └─┘ ┴ ┴─┘└─┘ | @license GNU Public License v3
 
 #include <stdint.h>
+#include <asm/io.h>
 
 typedef struct SMAP_entry {
  
